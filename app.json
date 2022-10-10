@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "mb-labs-test",
+    "slug": "mb-labs-test",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
