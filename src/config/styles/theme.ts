@@ -3,18 +3,18 @@ import { DefaultTheme } from "@react-navigation/native";
 export const themeSC = {
   colors: {
     primary: '#d8532a',
-    secondary: '#10495c',
-    background: '#121212',
+    secondary: '#0096C7',
+    background: '#0d0d0d',
     text: "#fafafa",
-    card: "#121212"
+    card: "#121212",
+    borderInput: '#7d7d7d',
+    placeHolderInput: '#5f5f5f',
+    white: "#fff"
   },
   fonts: {
-    montSerratRegular: 'Montserrat-Regular',
-    montSerratMedium: 'Montserrat-Medium',
-    montSerratBold: 'Montserrat-Bold',
-    robotoRegular: 'Roboto-Regular',
-    robotoMedium: 'Roboto-Medium',
-    robotoBold: 'Roboto-Bold'
+    interRegular: 'Inter-Regular',
+    interBold: 'Inter-Bold',
+    interMedium: 'Inter-Medium',
   }
 }
 

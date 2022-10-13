@@ -1,15 +1,86 @@
-import { Button, Text, View } from "react-native";
+import { Button, Text, View, ScrollView } from "react-native";
+import Input from "../../components/Input";
+import { useState, useEffect } from 'react'
 
 import * as S from './styles'
+import { IEvents } from "../../api/types";
+import api from "../../api/axios";
+import Card from "../../components/Card";
+import Icon from "../../assets/icons";
+import { themeSC } from "../../config/styles/theme";
 
 export default function Search({ navigation }) {
+  const [search, setSearch] = useState('')
+  const [eventList, setEventList] = useState<IEvents[]>([])
+
+  const eventFiltered = search.length > 0
+    ? eventList.filter(event => event.name.toLowerCase().includes(search.toLowerCase()))
+    : []
+
+  useEffect(() => {
+    searchEvents()
+  }, [])
+
+  const searchEvents = async () => {
+    try {
+      const response = await api.get<IEvents[]>('/events')
+      if (response) {
+        setEventList(response.data)
+      }
+    } catch (err) {
+      // console.log(err)
+    }
+  }
+
+  const renderNoResults = () => (
+    <S.ContainerNoResults>
+      <S.ContainerIcon>
+        <Icon name='Search' height={40} width={40} fill={themeSC.colors.placeHolderInput}/>
+      </S.ContainerIcon>
+      <S.TextNoResults>
+        Nenhum resultado encontrado
+      </S.TextNoResults>
+    </S.ContainerNoResults>
+  )
+
   return (
     <S.Container>
-      <Text>Search Event</Text>
-      <Button 
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
+      <Input 
+        value={search}
+        handleChange={(text) => setSearch(text)}
+        placeholder="Pesquisar por "
+        icon="Search"
       />
+      <ScrollView style={{ marginTop: 16}}>
+        <View >
+          { eventFiltered.length > 0
+            ? (
+              eventFiltered.map(event => (
+                <Card 
+                  key={event.id}
+                  title={event.name}
+                  imageUrl={event.imageUrl}
+                  dateInicial={event.date}
+                  local={event.local}
+                />
+              ))
+            )
+            : search.length > 0 
+            ? renderNoResults()
+            : (
+              eventList.map(event => (
+                <Card 
+                  key={event.id}
+                  title={event.name}
+                  imageUrl={event.imageUrl}
+                  dateInicial={event.date}
+                  local={event.local}
+                />
+              ))
+            )
+          }
+        </View>  
+      </ScrollView>
     </S.Container>
   );
 }
