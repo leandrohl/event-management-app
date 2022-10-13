@@ -1,0 +1,53 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "name": "Invelves Experience",
+      "local": "Pro Magno Centro de Eventos - São Paulo, SP",
+      "date": "sex, 13 out - 20:00 hrs",
+      "imageUrl": "https://i.ibb.co/Qv0BJ8W/involves-experience-logo.png"
+    },
+    {
+      "id": 2,
+      "name": "BHack Conference 2022",
+      "local": "Dayrell Hotel & Centro de Convenções - Belo Horizonte, MG",
+      "date": "sex, 26 nov - 20:00 hrs",
+      "imageUrl": "https://i.ibb.co/gWTC8fM/bhack-conference.png"
+    },
+    {
+      "id": 3,
+      "name": "CASE 2022 - Conferência Anual de Startups e Empreendedorismo",
+      "local": "Transamerica Expo Center, São Paulo - SP",
+      "date": "nov, 17 nov - 20:00 hrs",
+      "imageUrl": "https://i.ibb.co/1mGQtVK/case22-casesp.png"
+    },
+    {
+      "id": 4,
+      "name": "20º Seminário Internacional de Gerenciamento de Projetos (20SIGP)",
+      "local": "Centro Universitário Senac - Santo Amaro, São Paulo - SP",
+      "date": "sex, 16 nov - 20:00 hrs",
+      "imageUrl": "https://i.ibb.co/mSgdJJf/sigp.jpg"
+    },
+    {
+      "id": 5,
+      "name": "RD Summit 2022",
+      "local": "Centrosul - Florianópolis - Florianópolis, SC",
+      "date": "sex, 26 out - 08:00 hrs",
+      "imageUrl": "https://i.ibb.co/W0LbFqB/rdsummit.jpg"
+    },
+    {
+      "id": 6,
+      "name": "IX Congresso CAM-CCBC de Arbitragem",
+      "local": "Hilton São Paulo Morumbi, São Paulo - SP",
+      "date": "sex, 17 out - 08:00 hrs",
+      "imageUrl": "https://i.ibb.co/gW5LzPn/congresso-CAM0-CCBC.jpg"
+    },
+    {
+      "id": 7,
+      "name": "StartupON Presidente Prudente ",
+      "local": "Hilton São Paulo Morumbi, São Paulo - SP",
+      "date": "sab, 15 out - 08:30 hrs",
+      "imageUrl": "https://i.ibb.co/h9mgBg3/starton-prudente.jpg"
+    }
+  ]
+}
