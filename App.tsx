@@ -4,6 +4,7 @@ import Routes from "./src/routes";
 import { ThemeProvider } from "styled-components/native";
 import { themeSC, themeNavigation } from "./src/global/styles/theme";
 import { useFonts } from "expo-font";
+import { AuthProvider } from "./src/context";
 
 
 export default function App() {
@@ -20,7 +21,9 @@ export default function App() {
   return (
     <ThemeProvider theme={themeSC}>
       <NavigationContainer theme={themeNavigation}>
-        <Routes />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </NavigationContainer>
     </ThemeProvider>
   );

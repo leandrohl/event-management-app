@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1011855685015-c7ohm15fn29eolptqn08vu2ndr3jm28i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1011855685015-c7ohm15fn29eolptqn08vu2ndr3jm28i</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCmB_flQ3iI5hl2fcIRXQaccs_SBAKlT7c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1011855685015</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.name.mblabstest</string>
+	<key>PROJECT_ID</key>
+	<string>mb-labs-test</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mb-labs-test.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1011855685015:ios:a69ecb28b02e4f98ad40d2</string>
+</dict>
+</plist>

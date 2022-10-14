@@ -31,3 +31,7 @@ export const Subscribe = styled.Text`
    text-align: center;
    margin-top: 24px;
 `
+
+export const ViewGoBack = styled.View`
+  padding: 16px 0 0 8px;
+`
