@@ -3,15 +3,15 @@ import Input from "../../components/Input";
 import { useState, useEffect } from 'react'
 
 import * as S from './styles'
-import { IEvents } from "../../api/types";
+import { IEvent } from "../../api/types";
 import api from "../../api/axios";
 import Card from "../../components/Card";
 import Icon from "../../assets/icons";
-import { themeSC } from "../../config/styles/theme";
+import { themeSC } from "../../global/styles/theme";
 
 export default function Search({ navigation }) {
   const [search, setSearch] = useState('')
-  const [eventList, setEventList] = useState<IEvents[]>([])
+  const [eventList, setEventList] = useState<IEvent[]>([])
 
   const eventFiltered = search.length > 0
     ? eventList.filter(event => event.name.toLowerCase().includes(search.toLowerCase()))
@@ -23,13 +23,17 @@ export default function Search({ navigation }) {
 
   const searchEvents = async () => {
     try {
-      const response = await api.get<IEvents[]>('/events')
+      const response = await api.get<IEvent[]>('/events')
       if (response) {
         setEventList(response.data)
       }
     } catch (err) {
       // console.log(err)
     }
+  }
+
+  const goToEventDetails = (id: number) => {
+    navigation.navigate('Details', { eventId: id });
   }
 
   const renderNoResults = () => (
@@ -58,10 +62,12 @@ export default function Search({ navigation }) {
               eventFiltered.map(event => (
                 <Card 
                   key={event.id}
+                  id={event.id}
                   title={event.name}
                   imageUrl={event.imageUrl}
                   dateInicial={event.date}
                   local={event.local}
+                  onPress={() => goToEventDetails(event.id)}
                 />
               ))
             )
@@ -71,10 +77,12 @@ export default function Search({ navigation }) {
               eventList.map(event => (
                 <Card 
                   key={event.id}
+                  id={event.id}
                   title={event.name}
                   imageUrl={event.imageUrl}
                   dateInicial={event.date}
                   local={event.local}
+                  onPress={() => goToEventDetails(event.id)}
                 />
               ))
             )

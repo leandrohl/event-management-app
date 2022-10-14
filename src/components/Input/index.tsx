@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, View, TextInput } from 'react-native';
 import Icon from '../../assets/icons';
-import { themeSC } from '../../config/styles/theme';
+import { themeSC } from '../../global/styles/theme';
 
 import * as S from './styles';
 import { InputProps } from './types';
 
-const Input: React.FC<InputProps> = (props) => {
+export default function Input(props: InputProps) {
   const {
     placeholder,
-    value,
     icon,
     handleChange,
     disabled
@@ -28,18 +27,16 @@ const Input: React.FC<InputProps> = (props) => {
     <S.Container isActive={isActive}>
       {showIcon()}
       <S.ContainerInput>
-        <S.TextInputStyled 
-          value={value}
+        <S.TextInputStyled
           placeholder={placeholder}
           placeholderTextColor={themeSC.colors.placeHolderInput}
           onChangeText={handleChange}
           editable={!disabled}
           onFocus={(_) => setIsActive(true)}
           onBlur={(_) => setIsActive(false)}
+          {...props}
         />
       </S.ContainerInput>
     </S.Container>
   );
 };
-
-export default Input;

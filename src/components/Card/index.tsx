@@ -1,17 +1,19 @@
 import * as S from './styles'
 
 interface IEventCard {
+  id: number,
   imageUrl: string,
   title: string,
   local: string,
   dateInicial: string,
+  onPress: () => void,
 }
 
 export default function Card(props: IEventCard) {
-  const { title, imageUrl, local, dateInicial  } = props
+  const { title, imageUrl, local, dateInicial, onPress  } = props
 
   return (
-    <S.Container>
+    <S.Container onPress={onPress}>
       <S.Logo source={{
         uri: `${imageUrl}`
       }}/>

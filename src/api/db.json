@@ -5,49 +5,60 @@
       "name": "Invelves Experience",
       "local": "Pro Magno Centro de Eventos - São Paulo, SP",
       "date": "sex, 13 out - 20:00 hrs",
-      "imageUrl": "https://i.ibb.co/Qv0BJ8W/involves-experience-logo.png"
+      "price": "R$ 1.290,00",
+      "imageUrl": "https://i.ibb.co/Qv0BJ8W/involves-experience-logo.png",
+      "organization": "Involves Tecnologia",
+      "description": "O mundo mudou muito nesses últimos dois anos, inclusive o nome do nosso evento. Mas, algumas coisas permanecem as mesmas: a vontade de voltar aos palcos, reunindo os maiores nomes do trade marketing da América Latina, e estabelecer conexões entre indústrias, agências, distribuidoras e varejo ao que há de mais importante acontecendo no segmento. "
     },
     {
       "id": 2,
       "name": "BHack Conference 2022",
       "local": "Dayrell Hotel & Centro de Convenções - Belo Horizonte, MG",
       "date": "sex, 26 nov - 20:00 hrs",
-      "imageUrl": "https://i.ibb.co/gWTC8fM/bhack-conference.png"
+      "price": "R$ 722,00",
+      "imageUrl": "https://i.ibb.co/gWTC8fM/bhack-conference.png",
+      "organization": "BHack Conference",
+      "description": "Desde 2012, a BHack tem como objetivo atender às necessidades do público mineiro quando se trata de Segurança da Informação (SI). E neste ano, a 11ª edição da conferência, que já se consolidou no cenário nacional como um dos eventos anuais de maior importância no circuito, está com formato ainda mais interessante e direcionado."
     },
     {
       "id": 3,
       "name": "CASE 2022 - Conferência Anual de Startups e Empreendedorismo",
       "local": "Transamerica Expo Center, São Paulo - SP",
       "date": "nov, 17 nov - 20:00 hrs",
-      "imageUrl": "https://i.ibb.co/1mGQtVK/case22-casesp.png"
+      "price": "R$ 649,50",
+      "imageUrl": "https://i.ibb.co/1mGQtVK/case22-casesp.png",
+      "organization": "Abstartups",
+      "description": "Saudades de um CASE presencial, né? Pois bem, estamos de volta para realizar o MAIOR E MELHOR CASE DA HISTÓRIA! A 9ª edição da Conferência Anual de Startups e Empreendedorismo vai superar todas as edições anteriores, com uma feira de negócios ainda maior e os melhores nomes do ecossistema de Startups nacional e internacional."
     },
     {
       "id": 4,
       "name": "20º Seminário Internacional de Gerenciamento de Projetos (20SIGP)",
       "local": "Centro Universitário Senac - Santo Amaro, São Paulo - SP",
       "date": "sex, 16 nov - 20:00 hrs",
-      "imageUrl": "https://i.ibb.co/mSgdJJf/sigp.jpg"
+      "price": "R$ 902,50",
+      "imageUrl": "https://i.ibb.co/mSgdJJf/sigp.jpg",
+      "organization": "PMI São Paulo",
+      "description": "O PMI São Paulo promove o “20º Seminário Internacional de Gerenciamento de Projetos (20SIGP)”, um dos maiores eventos de projetos da América Latina. O evento abordará temas relacionados com formas de trabalhar, habilidades de empoderamento e visão de negócios necessárias além das fronteiras com um olhar para o futuro. "
     },
     {
       "id": 5,
       "name": "RD Summit 2022",
       "local": "Centrosul - Florianópolis - Florianópolis, SC",
-      "date": "sex, 26 out - 08:00 hrs",
-      "imageUrl": "https://i.ibb.co/W0LbFqB/rdsummit.jpg"
+      "date": "sex, 26, 27 e 28 out - 08:00 hrs",
+      "price": "R$ 2.699,00",
+      "imageUrl": "https://i.ibb.co/W0LbFqB/rdsummit.jpg",
+      "organization": "RD Station",
+      "description": "Em um formato de múltiplos palcos e trilhas, o evento promove a integração entre conteúdo de alta qualidade, networking de impacto, negócios, tecnologia, arte, música e experiências surpreendentes, em uma verdadeira “cidade”, construída junto ao mar da paradisíaca Florianópolis. São 3 dias de imersão, com as principais referências e marcas do mercado, em um dos maiores pólos de tecnologia do Brasil."
     },
     {
       "id": 6,
       "name": "IX Congresso CAM-CCBC de Arbitragem",
       "local": "Hilton São Paulo Morumbi, São Paulo - SP",
       "date": "sex, 17 out - 08:00 hrs",
-      "imageUrl": "https://i.ibb.co/gW5LzPn/congresso-CAM0-CCBC.jpg"
-    },
-    {
-      "id": 7,
-      "name": "StartupON Presidente Prudente ",
-      "local": "Hilton São Paulo Morumbi, São Paulo - SP",
-      "date": "sab, 15 out - 08:30 hrs",
-      "imageUrl": "https://i.ibb.co/h9mgBg3/starton-prudente.jpg"
+      "price": "R$ 1.104,00",
+      "imageUrl": "https://i.ibb.co/gW5LzPn/congresso-CAM0-CCBC.jpg",
+      "organization": "CAM-CCBC - Centro de Arbitragem e Mediação da Câmara de Comércio Brasil-Canadá",
+      "description": "O hoje e o amanhã da arbitragem em foco: o congresso aborda os desafios mais atuais enfrentados pela arbitragem e as suas tendências. Com temário consistente e assentado na prática dos casos administrados pelo CAM-CCBC, o evento estimula o debate entre renomados profissionais em busca de novas soluções para o mercado arbitral."
     }
   ]
 }

@@ -1,7 +1,10 @@
-export interface IEvents {
+export interface IEvent {
   id: number,
   name: string,
   local: string,
   date: string,
-  imageUrl: string
+  price: string,
+  imageUrl: string,
+  organization: string,
+  description: string
 }

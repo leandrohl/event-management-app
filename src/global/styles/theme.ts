@@ -9,7 +9,9 @@ export const themeSC = {
     card: "#121212",
     borderInput: '#7d7d7d',
     placeHolderInput: '#5f5f5f',
-    white: "#fff"
+    white: "#fff",
+    icon: '#878686',
+    link: '#1877f2'
   },
   fonts: {
     interRegular: 'Inter-Regular',

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity `
   margin: 16px 12px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-color: ${props => props.theme.colors.card};
