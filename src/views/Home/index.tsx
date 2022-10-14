@@ -4,10 +4,10 @@ import { useEffect, useState } from "react"
 
 import * as S from './styles'
 import api from "../../api/axios";
-import { IEvents } from "../../api/types";
+import { IEvent } from "../../api/types";
 
 export default function Home({ navigation }) {
-  const [eventList, setEventList] = useState<IEvents[]>([])
+  const [eventList, setEventList] = useState<IEvent[]>([])
 
   useEffect(() => {
     searchEvents()
@@ -15,13 +15,17 @@ export default function Home({ navigation }) {
 
   const searchEvents = async () => {
     try {
-      const response = await api.get<IEvents[]>('/events')
+      const response = await api.get<IEvent[]>('/events')
       if (response) {
         setEventList(response.data)
       }
     } catch (err) {
       // console.log(err)
     }
+  }
+
+  const goToEventDetails = (id: number) => {
+    navigation.navigate('Details', { eventId: id });
   }
 
   return (
@@ -37,10 +41,12 @@ export default function Home({ navigation }) {
           {eventList.map(event => (
               <Card 
                 key={event.id}
+                id={event.id}
                 title={event.name}
                 imageUrl={event.imageUrl}
                 dateInicial={event.date}
                 local={event.local}
+                onPress={() => goToEventDetails(event.id)}
               />
           ))}
         </View>
