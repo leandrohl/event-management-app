@@ -8,3 +8,8 @@ export interface IEvent {
   organization: string,
   description: string
 }
+
+export class IAuth {
+  email: string = ''
+  password: string = ''
+}

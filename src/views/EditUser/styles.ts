@@ -24,16 +24,6 @@ export const ContainerInputs = styled.View`
   margin-top: 28px;
 `
 
-export const Login = styled.Text`
-   color: ${props => props.theme.colors.text};
-   font-family: ${props => props.theme.fonts.interMedium};
-   font-size: 12px;
-   opacity: 0.7;
-
-   text-align: center;
-   margin-top: 24px;
-`
-
 export const ViewGoBack = styled.View`
   padding: 16px 0 0 8px;
 `

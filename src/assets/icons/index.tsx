@@ -81,6 +81,12 @@ const Payments = (props: IconProps) => (
   </Svg>
 );
 
+const Close = (props: IconProps) => (
+  <Svg viewBox="0 0 24 24" {...adjIconProps(props)}>
+    <Path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+  </Svg>
+);
+
 export const IconList = {
   Home,
   Person,
@@ -91,7 +97,8 @@ export const IconList = {
   Calendar,
   Location,
   Groups,
-  Payments
+  Payments,
+  Close
 }
 
 const Icon = (props: IconPropsDefault) => {

@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ScrollView, Text, View, SafeAreaView } from "react-native";
+import { Modalize } from "react-native-modalize";
 import api from "../../api/axios";
 import { IEvent } from "../../api/types";
 import Icon from "../../assets/icons";
 import IconButton from "../../components/Buttons/IconButton";
+import ModalizeBuyTicket from "./components/BuyTicket";
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 import * as S from './styles'
 
@@ -14,6 +18,10 @@ interface IParams {
 export default function DetailsEvent( { navigation, route }) {
   const { eventId } = route.params as IParams
   const [eventSelected, setEventSelected] = useState<IEvent>()
+  const modalizeRef = useRef<Modalize>(null)
+  const database = firestore();
+
+  const user = auth().currentUser
 
   useEffect(() => {
     searchEventById(eventId)
@@ -32,6 +40,15 @@ export default function DetailsEvent( { navigation, route }) {
       }
     } catch (err) {
     }
+  }
+  
+  const handleAddTicket = () => {
+    if (!user) navigation.navigate("Login")
+    database.collection(user.uid).add({
+      ...eventSelected,
+      dateBuy: new Date()
+    })
+    navigation.navigate("Tickets")
   }
 
   if (!eventSelected) return <Text> dsd </Text>
@@ -69,9 +86,13 @@ export default function DetailsEvent( { navigation, route }) {
           </S.Content>
         </ScrollView>
       </S.Container>
-      <S.ButtonBuy>
+      <S.ButtonBuy onPress={() => modalizeRef.current?.open()}>
         <S.TextBuy>Comprar Ingresso</S.TextBuy>
       </S.ButtonBuy>
+      <ModalizeBuyTicket
+        modalizeRef={modalizeRef}
+        confirmBuyTicket={handleAddTicket}
+      />
     </SafeAreaView>
   );
 }

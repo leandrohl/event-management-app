@@ -7,22 +7,31 @@ import auth from '@react-native-firebase/auth';
 import * as S from './styles'
 
 import IconButton from "../../components/Buttons/IconButton";
-import { INewUser } from "./types";
-import { useTheme } from "styled-components";
+import { useTheme } from "styled-components/native";
 
-export default function NewUser({ navigation }) {
-  const [userInfo, setUserInfo] = useState<INewUser>(new INewUser())
+export interface INewUser {
+  name: string
+  email: string
+  newPassword: string
+}
 
-  const theme = useTheme()
-  const handleRegister = async () => {
+export default function EditUser({ navigation, route }) {
+  const { userName } = route.params 
+  const [userInfo, setUserInfo] = useState<INewUser>({
+    name: userName,
+    email: '',
+    newPassword: ''
+  })
+
+
+  const handleEditUser = async () => {
     try {
-      const response = await auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
-      
       await auth().currentUser.updateProfile({
         displayName: userInfo.name
       })
-
-      navigation.navigate("Tickets", { userId: response.user.uid})
+      // await user.updateEmail(userInfo.email)
+      // await user.updateEmail(userInfo.newPassword)
+      navigation.goBack()
     } catch (error) {
       console.error(error)
     }
@@ -34,7 +43,7 @@ export default function NewUser({ navigation }) {
         <IconButton iconName="ArrowBack" handleClick={() => navigation.goBack()}/>
       </S.ViewGoBack>
       <S.Container>
-        <S.Title> Crie uma conta na MB.Events </S.Title>
+        <S.Title> Editar perfil </S.Title>
         <S.ContainerInputs>
           <Input 
             value={userInfo.name}
@@ -43,7 +52,7 @@ export default function NewUser({ navigation }) {
             autoComplete="off"
             autoCorrect={false}
           />
-          <View style={{ marginTop: 20, marginBottom: 20}}>
+          {/* <View style={{ marginTop: 20, marginBottom: 20}}>
             <Input 
               value={userInfo.email}
               handleChange={(text) => setUserInfo({ ...userInfo, email: text })}
@@ -54,25 +63,16 @@ export default function NewUser({ navigation }) {
             />
           </View>
           <Input 
-            value={userInfo.password}
-            handleChange={(text) => setUserInfo({ ...userInfo, password: text })}
-            placeholder="Senha"
+            value={userInfo.newPassword}
+            handleChange={(text) => setUserInfo({ ...userInfo, newPassword: text })}
+            placeholder="Nova senha"
             secureTextEntry
             autoComplete="off"
             autoCorrect={false}
-          />
+          /> */}
         </S.ContainerInputs>
         <View style={{ width: '100%'}}>
-          <Button title="Cadastrar" handleClick={handleRegister}/>
-          <S.Login>
-            Já tem um registro?
-            <Text
-              onPress={() => navigation.navigate("Login")}
-              style={{ color: theme.colors.link }}
-            >
-              Login...
-            </Text> 
-          </S.Login>
+          <Button title="Salvar" handleClick={handleEditUser}/>
         </View>
       </S.Container>
     </SafeAreaView>

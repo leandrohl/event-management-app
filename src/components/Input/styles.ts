@@ -25,7 +25,7 @@ export const ContainerInput = styled.View`
 `;
 
 export const TextInputStyled = styled(TextInput)`
-  color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.borderInput};
   font-size: 18px;
   font-family: ${props => props.theme.fonts.interRegular};
   font-weight: bold;

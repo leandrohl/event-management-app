@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1011855685015",
+    "project_id": "mb-labs-test",
+    "storage_bucket": "mb-labs-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011855685015:android:973f51c56354a73dad40d2",
+        "android_client_info": {
+          "package_name": "com.mblabstest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011855685015-cbejgavmjplcd74ir515me47c4rmksn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI8CyW3kqib1td6Jv4o27xexjCmknMR8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011855685015-cbejgavmjplcd74ir515me47c4rmksn1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
