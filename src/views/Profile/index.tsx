@@ -1,21 +1,14 @@
-import { useEffect, useReducer, useState } from "react";
+import { useState, useEffect } from "react";
 import { Text, View } from "react-native";
 import Button from "../../components/Buttons/Button";
 import auth from '@react-native-firebase/auth';
 
 import * as S from './styles'
-import { useAuth } from "../../context";
 import NotLogged from "../../components/NotLogged";
 
-interface IUserInfo {
-  name: string;
-  email: string;
-}
-
 export default function Profile({ navigation }) {
-  const { user, signed } = useAuth()
-
-
+  let user = auth().currentUser
+  
   const logout = () => {
     try {
       auth().signOut()
@@ -23,20 +16,26 @@ export default function Profile({ navigation }) {
     } catch (error) {
 
     }
-    navigation.navigate("Login")
+  }
+
+  const getInitialLetters = (text: string, withUppercase = false) => {
+    const arrayText = text.split(' ')
+    if (arrayText.length === 1) return arrayText[0][0]
+    const letters = arrayText[0][0] + arrayText[arrayText.length - 1][0]
+    return withUppercase ? letters.toUpperCase() : letters
   }
 
   const renderProfile = () => (
     <S.Container>
       <S.InfoUser>
         <S.Avatar>
-          <S.TextAvatar> LS </S.TextAvatar>
+          <S.TextAvatar> {getInitialLetters(user.displayName, true)} </S.TextAvatar>
         </S.Avatar>
-        <S.TextName> Leandro Henrique </S.TextName>
+        <S.TextName> {user.displayName} </S.TextName>
         <S.TextEmail> {user.email} </S.TextEmail>
         <Button 
-          title="Editar Perfil" 
-          handleClick={() => {}} 
+          title="Editar perfil" 
+          handleClick={() => navigation.navigate("EditUser", { userName: user.displayName })} 
           variant="outlined"
         />
       </S.InfoUser>
@@ -49,7 +48,6 @@ export default function Profile({ navigation }) {
       </View>
     </S.Container>
   )
-
-
-  return signed ? renderProfile() : <NotLogged navigation={navigation}/>
+  
+  return user ? renderProfile() : <NotLogged navigation={navigation}/>
 }

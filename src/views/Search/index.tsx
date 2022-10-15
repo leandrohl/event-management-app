@@ -7,11 +7,13 @@ import { IEvent } from "../../api/types";
 import api from "../../api/axios";
 import Card from "../../components/Card";
 import Icon from "../../assets/icons";
-import { themeSC } from "../../global/styles/theme";
+import { useTheme } from "styled-components/native";
 
 export default function Search({ navigation }) {
   const [search, setSearch] = useState('')
   const [eventList, setEventList] = useState<IEvent[]>([])
+
+  const theme = useTheme()
 
   const eventFiltered = search.length > 0
     ? eventList.filter(event => event.name.toLowerCase().includes(search.toLowerCase()))
@@ -39,7 +41,7 @@ export default function Search({ navigation }) {
   const renderNoResults = () => (
     <S.ContainerNoResults>
       <S.ContainerIcon>
-        <Icon name='Search' height={40} width={40} fill={themeSC.colors.placeHolderInput}/>
+        <Icon name='Search' height={40} width={40} fill={theme.colors.placeHolderInput}/>
       </S.ContainerIcon>
       <S.TextNoResults>
         Nenhum resultado encontrado

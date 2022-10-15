@@ -4,7 +4,7 @@ import { IVariant } from "./types";
 export const ButtonStyled = styled.TouchableOpacity<{ variant: IVariant }>`
   border-radius: 10px;
   background: ${props => props.variant === 'filled' ? props.theme.colors.primary : props.theme.colors.background};
-  border: ${props => props.variant === 'filled' ? props.theme.colors.background : props.theme.colors.primary}
+  border: ${props => props.variant === 'filled' ? 'none' : props.theme.colors.primary}
   flex-direction: row;
   justify-content: center;
   align-items: center;

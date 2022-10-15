@@ -2,9 +2,8 @@ import { NavigationContainer, DefaultTheme  } from "@react-navigation/native";
 import React from "react";
 import Routes from "./src/routes";
 import { ThemeProvider } from "styled-components/native";
-import { themeSC, themeNavigation } from "./src/global/styles/theme";
+import { theme, themeNavigation } from "./src/global/styles/theme";
 import { useFonts } from "expo-font";
-import { AuthProvider } from "./src/context";
 
 
 export default function App() {
@@ -19,11 +18,9 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={themeSC}>
+    <ThemeProvider theme={theme}>
       <NavigationContainer theme={themeNavigation}>
-        <AuthProvider>
-          <Routes />
-        </AuthProvider>
+        <Routes />
       </NavigationContainer>
     </ThemeProvider>
   );

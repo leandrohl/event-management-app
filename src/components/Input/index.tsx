@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, View, TextInput } from 'react-native';
+import { useTheme } from 'styled-components/native';
 import Icon from '../../assets/icons';
-import { themeSC } from '../../global/styles/theme';
 
 import * as S from './styles';
 import { InputProps } from './types';
@@ -15,11 +15,11 @@ export default function Input(props: InputProps) {
   } = props;
 
   const [isActive, setIsActive] = useState(false);
-
+  const theme = useTheme()
 
   function showIcon () {
     if (typeof icon === 'string') {
-      return <Icon name={icon} fill={themeSC.colors.borderInput}/>;
+      return <Icon name={icon} fill={theme.colors.borderInput}/>;
     } else return icon;
   }
 
@@ -29,7 +29,7 @@ export default function Input(props: InputProps) {
       <S.ContainerInput>
         <S.TextInputStyled
           placeholder={placeholder}
-          placeholderTextColor={themeSC.colors.placeHolderInput}
+          placeholderTextColor={theme.colors.placeHolderInput}
           onChangeText={handleChange}
           editable={!disabled}
           onFocus={(_) => setIsActive(true)}

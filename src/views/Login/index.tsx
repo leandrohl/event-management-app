@@ -2,22 +2,25 @@ import { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text, SafeAreaView } from "react-native";
 import Button from "../../components/Buttons/Button";
 import Input from "../../components/Input";
-import { themeSC } from "../../global/styles/theme";
 import auth from '@react-native-firebase/auth';
 
 import * as S from './styles'
 
-import { Auth } from 'firebase/auth'
 import { IAuth } from "../../api/types";
 import IconButton from "../../components/Buttons/IconButton";
+import { useTheme } from "styled-components/native";
 
 export default function Login({ navigation }) {
   const [userInfo, setUserInfo] = useState<IAuth>(new IAuth())
+
+  const theme = useTheme()
 
   async function handleLogin() {
     try {
       const { email, password } = userInfo
       const response = await auth().signInWithEmailAndPassword(email, password)
+
+      navigation.navigate("Tickets", { userId: response.user.uid })
 
     } catch (error) {
       console.log(error.message)
@@ -57,7 +60,7 @@ export default function Login({ navigation }) {
             Não tem registro?
             <Text
               onPress={() => navigation.navigate("NewUser")}
-              style={{ color: themeSC.colors.link }}
+              style={{ color: theme.colors.link }}
             >
               Se inscreva agora...
             </Text> 

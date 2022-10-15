@@ -1,8 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
-import Icon from '../../../assets/icons';
-import { IconName } from '../../../assets/icons/types';
-import { themeSC } from '../../../global/styles/theme';
 
 import * as S from './styles';
 import { IButtonProps } from './types';
