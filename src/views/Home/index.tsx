@@ -1,10 +1,11 @@
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View } from "react-native";
 import Card from "../../components/Card";
 import { useEffect, useState } from "react"
 
 import * as S from './styles'
-import api from "../../api/axios";
-import { IEvent } from "../../api/types";
+import api from "../../services/axios";
+import { IEvent } from "../../services/types";
+import Snackbar from "react-native-snackbar";
 
 export default function Home({ navigation }) {
   const [eventList, setEventList] = useState<IEvent[]>([])
@@ -20,7 +21,10 @@ export default function Home({ navigation }) {
         setEventList(response.data)
       }
     } catch (err) {
-      // console.log(err)
+      Snackbar.show({
+        text: 'Houve um erro ao buscar os eventos!',
+        duration: Snackbar.LENGTH_SHORT
+      })
     }
   }
 

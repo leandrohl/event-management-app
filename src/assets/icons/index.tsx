@@ -87,6 +87,7 @@ const Close = (props: IconProps) => (
   </Svg>
 );
 
+
 export const IconList = {
   Home,
   Person,

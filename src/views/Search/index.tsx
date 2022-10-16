@@ -1,13 +1,14 @@
-import { Button, Text, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import Input from "../../components/Input";
 import { useState, useEffect } from 'react'
 
 import * as S from './styles'
-import { IEvent } from "../../api/types";
-import api from "../../api/axios";
+import { IEvent } from "../../services/types";
+import api from "../../services/axios";
 import Card from "../../components/Card";
 import Icon from "../../assets/icons";
 import { useTheme } from "styled-components/native";
+import Snackbar from "react-native-snackbar";
 
 export default function Search({ navigation }) {
   const [search, setSearch] = useState('')
@@ -30,7 +31,9 @@ export default function Search({ navigation }) {
         setEventList(response.data)
       }
     } catch (err) {
-      // console.log(err)
+      Snackbar.show({
+        text: err.message || 'Houve um erro ao buscar os eventos, tente novamente mais tarde!'
+      })
     }
   }
 
@@ -58,7 +61,7 @@ export default function Search({ navigation }) {
         icon="Search"
       />
       <ScrollView style={{ marginTop: 16}}>
-        <View >
+        <View>
           { eventFiltered.length > 0
             ? (
               eventFiltered.map(event => (

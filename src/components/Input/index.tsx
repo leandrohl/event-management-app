@@ -11,7 +11,9 @@ export default function Input(props: InputProps) {
     placeholder,
     icon,
     handleChange,
-    disabled
+    disabled,
+    error,
+    errorMessage
   } = props;
 
   const [isActive, setIsActive] = useState(false);
@@ -24,19 +26,22 @@ export default function Input(props: InputProps) {
   }
 
   return (
-    <S.Container isActive={isActive}>
-      {showIcon()}
-      <S.ContainerInput>
-        <S.TextInputStyled
-          placeholder={placeholder}
-          placeholderTextColor={theme.colors.placeHolderInput}
-          onChangeText={handleChange}
-          editable={!disabled}
-          onFocus={(_) => setIsActive(true)}
-          onBlur={(_) => setIsActive(false)}
-          {...props}
-        />
-      </S.ContainerInput>
-    </S.Container>
+    <View>
+      <S.Container isActive={isActive} error={error}>
+        {showIcon()}
+        <S.ContainerInput>
+          <S.TextInputStyled
+            placeholder={placeholder}
+            placeholderTextColor={theme.colors.placeHolderInput}
+            onChangeText={handleChange}
+            editable={!disabled}
+            onFocus={(_) => setIsActive(true)}
+            onBlur={(_) => setIsActive(false)}
+            {...props}
+          />
+        </S.ContainerInput>
+      </S.Container>
+      {error && <S.ErrorMessage> {errorMessage} </S.ErrorMessage>}
+    </View>
   );
 };

@@ -8,6 +8,8 @@ import * as S from './styles'
 
 import IconButton from "../../components/Buttons/IconButton";
 import { useTheme } from "styled-components/native";
+import Snackbar from "react-native-snackbar";
+import { useAuth } from "../../contexts/Auth";
 
 export interface INewUser {
   name: string
@@ -17,24 +19,34 @@ export interface INewUser {
 
 export default function EditUser({ navigation, route }) {
   const { userName } = route.params 
-  const [userInfo, setUserInfo] = useState<INewUser>({
-    name: userName,
-    email: '',
-    newPassword: ''
-  })
+  const { updateUserName } = useAuth()
 
+  const [name, setName] = useState(userName)
+  const [erroName, setErrorName] = useState('')
+
+  const [loading, setLoading] = useState(false)
 
   const handleEditUser = async () => {
+    setLoading(true)
     try {
+      if (name === '') {
+        setErrorName("Campo obrigatório")
+        setLoading(false)
+        return
+      }
+
       await auth().currentUser.updateProfile({
-        displayName: userInfo.name
+        displayName: name
       })
-      // await user.updateEmail(userInfo.email)
-      // await user.updateEmail(userInfo.newPassword)
-      navigation.goBack()
+      updateUserName(name)
+      navigation.navigate("Perfil")
     } catch (error) {
-      console.error(error)
+      Snackbar.show({
+        text: 'Houve um erro ao editar seu perfil, tente novamente!',
+        duration: Snackbar.LENGTH_SHORT
+      })
     }
+    setLoading(false)
   }
 
   return (
@@ -46,33 +58,21 @@ export default function EditUser({ navigation, route }) {
         <S.Title> Editar perfil </S.Title>
         <S.ContainerInputs>
           <Input 
-            value={userInfo.name}
-            handleChange={(text) => setUserInfo({ ...userInfo, name: text })}
+            value={name}
+            handleChange={(text) => setName(text)}
             placeholder="Nome"
             autoComplete="off"
             autoCorrect={false}
+            error={!!erroName}
+            errorMessage={erroName}
           />
-          {/* <View style={{ marginTop: 20, marginBottom: 20}}>
-            <Input 
-              value={userInfo.email}
-              handleChange={(text) => setUserInfo({ ...userInfo, email: text })}
-              placeholder="Email"
-              autoComplete="off"
-              autoCorrect={false}
-              keyboardType="email-address"
-            />
-          </View>
-          <Input 
-            value={userInfo.newPassword}
-            handleChange={(text) => setUserInfo({ ...userInfo, newPassword: text })}
-            placeholder="Nova senha"
-            secureTextEntry
-            autoComplete="off"
-            autoCorrect={false}
-          /> */}
         </S.ContainerInputs>
         <View style={{ width: '100%'}}>
-          <Button title="Salvar" handleClick={handleEditUser}/>
+          <Button 
+            title="Salvar" 
+            handleClick={handleEditUser} 
+            loading={loading}
+          />
         </View>
       </S.Container>
     </SafeAreaView>
