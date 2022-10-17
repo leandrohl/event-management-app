@@ -1,5 +1,5 @@
 export interface IEvent {
-  id: number,
+  id: string,
   name: string,
   local: string,
   date: string,
@@ -7,6 +7,12 @@ export interface IEvent {
   imageUrl: string,
   organization: string,
   description: string
+}
+
+export interface ITicket {
+  id: string,
+  dateBuy: string,
+  event: IEvent
 }
 
 export class IAuth {

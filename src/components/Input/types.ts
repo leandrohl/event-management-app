@@ -10,13 +10,13 @@ export interface InputProps extends TextInputProps {
   rightIcon?: IconName;
   rightClick?: () => void;
   handleChange: (text: string) => void;
-  onRef?: (ref: any) => void;
   errorMessage?: string;
-  label?: string;
+  error?: boolean;
   disabled?: boolean;
   loading?: boolean;
 }
 
 export interface InputStyle {
   isActive?: boolean;
+  error?: boolean
 }

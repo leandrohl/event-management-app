@@ -1,57 +1,59 @@
 import { useEffect, useState, useRef } from "react";
 import { ScrollView, Text, View, SafeAreaView } from "react-native";
 import { Modalize } from "react-native-modalize";
-import api from "../../api/axios";
-import { IEvent } from "../../api/types";
 import Icon from "../../assets/icons";
 import IconButton from "../../components/Buttons/IconButton";
 import ModalizeBuyTicket from "./components/BuyTicket";
 import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
 
 import * as S from './styles'
+import { useAuth } from "../../contexts/Auth";
+import { IEvent, ITicket } from "../../services/types";
+import api from "../../services/axios";
+import Snackbar from "react-native-snackbar";
+import Loading from "../../components/Loading";
+import { useTheme } from "styled-components/native";
 
 interface IParams {
-  eventId: number
+  event: IEvent
 }
 
 export default function DetailsEvent( { navigation, route }) {
-  const { eventId } = route.params as IParams
-  const [eventSelected, setEventSelected] = useState<IEvent>()
+  const { event } = route.params as IParams
+  const [eventSelected, setEventSelected] = useState<IEvent>(event)
+  const [loading, setLoading] = useState(false)
+
   const modalizeRef = useRef<Modalize>(null)
   const database = firestore();
+  const { user, signed } = useAuth()
+  const theme = useTheme()
 
-  const user = auth().currentUser
-
-  useEffect(() => {
-    searchEventById(eventId)
-  }, [])
-
-
-  const searchEventById = async (id: number) => {
-    try {
-      const response = await api.get<IEvent[]>('/events')
-      if (response) {
-        const event = response.data.find(event => event.id === id)
-
-        if (event) {
-          setEventSelected(event)
-        }
-      }
-    } catch (err) {
-    }
-  }
   
   const handleAddTicket = () => {
-    if (!user) navigation.navigate("Login")
-    database.collection(user.uid).add({
-      ...eventSelected,
-      dateBuy: new Date()
-    })
-    navigation.navigate("Tickets")
+    setLoading(true)
+    if (!signed) {
+      Snackbar.show({
+        text: 'Para comprar esse ingresso, você precisa estar autenticado.',
+        duration: Snackbar.LENGTH_SHORT,
+        action: {
+          text: "Login",
+          onPress: () => navigation.navigate("Login"),
+          textColor: theme.colors.primary
+        }
+      })
+      setLoading(false)
+      return
+    }
+
+    database.collection(user.userId).add({
+      event: eventSelected,
+      dateBuy: new Date().toLocaleDateString('pt-br')
+    } as ITicket)
+    navigation.navigate("Ingressos")
+    setLoading(false)
   }
 
-  if (!eventSelected) return <Text> dsd </Text>
+  if (loading) return <Loading />
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

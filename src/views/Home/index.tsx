@@ -1,31 +1,31 @@
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View } from "react-native";
 import Card from "../../components/Card";
 import { useEffect, useState } from "react"
 
 import * as S from './styles'
-import api from "../../api/axios";
-import { IEvent } from "../../api/types";
+import { IEvent } from "../../services/types";
+import firestore from '@react-native-firebase/firestore';
 
 export default function Home({ navigation }) {
   const [eventList, setEventList] = useState<IEvent[]>([])
+  const database = firestore();
 
   useEffect(() => {
     searchEvents()
   }, [])
 
   const searchEvents = async () => {
-    try {
-      const response = await api.get<IEvent[]>('/events')
-      if (response) {
-        setEventList(response.data)
-      }
-    } catch (err) {
-      // console.log(err)
-    }
+    database.collection('Events').onSnapshot(( query ) => {
+      const list = []
+      query.forEach((doc) => {
+        list.push({ ...doc.data(), id: doc.id })
+      })
+      setEventList(list)
+    }) 
   }
 
-  const goToEventDetails = (id: number) => {
-    navigation.navigate('Details', { eventId: id });
+  const goToEventDetails = (event: IEvent) => {
+    navigation.navigate('Details', { event });
   }
 
   return (
@@ -46,7 +46,7 @@ export default function Home({ navigation }) {
                 imageUrl={event.imageUrl}
                 dateInicial={event.date}
                 local={event.local}
-                onPress={() => goToEventDetails(event.id)}
+                onPress={() => goToEventDetails(event)}
               />
           ))}
         </View>

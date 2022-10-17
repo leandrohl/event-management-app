@@ -51,3 +51,29 @@ export const TextInfo = styled.Text`
   color: ${props => props.theme.colors.text};
   font-family: ${props => props.theme.fonts.interMedium};
 `
+
+export const QRCodeView = styled.View`
+  margin-top: 16px;
+  align-items: center;
+`
+
+export const ContainerNoResults = styled.View`
+  align-items: center;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 80px;
+`
+
+export const ContainerIcon = styled.View`
+  background-color: ${props => props.theme.colors.card};
+  padding: 16px;
+  border-radius: 40px;
+`
+
+export const TextNoResults = styled.Text`
+  color: ${props => props.theme.colors.text};
+  font-size: 16px;
+  opacity: 0.5;
+  margin-top: 12px;
+`

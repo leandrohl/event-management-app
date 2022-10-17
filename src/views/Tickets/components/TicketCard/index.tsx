@@ -3,7 +3,7 @@ import * as S from './styles'
 import {View} from 'react-native'
 
 interface ITicketCard {
-  id: number,
+  id: string,
   imageUrl: string,
   title: string,
   local: string,

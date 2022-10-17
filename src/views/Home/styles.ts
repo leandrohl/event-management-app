@@ -1,6 +1,5 @@
 import styled from 'styled-components/native'
 
-
 export const Info = styled.View`
   padding: 16px 12px;
 `

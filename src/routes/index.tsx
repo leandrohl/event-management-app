@@ -11,11 +11,19 @@ import Login from '../views/Login';
 import NewUser from '../views/NewUser';
 import EditUser from '../views/EditUser';
 import { useTheme } from '@react-navigation/native';
+import { useAuth } from '../contexts/Auth';
+import Loading from '../components/Loading';
 
 const AppStack = createNativeStackNavigator();
 const AppTab = createBottomTabNavigator();
 
 export default function Routes() {
+  const { loadingScreen } = useAuth()
+
+  if (loadingScreen) {
+    return <Loading />
+  }
+
   return (
     <AppStack.Navigator screenOptions={{ headerShown: false }}>
       <AppStack.Screen name="Events" component={AppTabs}/>

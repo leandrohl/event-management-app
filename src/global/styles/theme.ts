@@ -11,7 +11,8 @@ export const theme = {
     placeHolderInput: '#5f5f5f',
     white: "#fff",
     icon: '#878686',
-    link: '#1877f2'
+    link: '#1877f2',
+    error: '#CE0D30'
   },
   fonts: {
     interRegular: 'Inter-Regular',

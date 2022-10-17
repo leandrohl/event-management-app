@@ -2,7 +2,8 @@ import styled from 'styled-components/native'
 
 export const Container = styled.View`
   padding: 0 12px;
-  margin-top: 28px;
+  margin-top: 24px;
+  margin-bottom: 48px;
 `
 
 export const ContainerNoResults = styled.View`
@@ -21,6 +22,7 @@ export const ContainerIcon = styled.View`
 
 export const TextNoResults = styled.Text`
   color: ${props => props.theme.colors.text};
+  font-family: ${props => props.theme.fonts.interRegular};
   opacity: 0.5;
   margin-top: 12px;
 `

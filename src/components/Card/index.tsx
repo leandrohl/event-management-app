@@ -1,7 +1,7 @@
 import * as S from './styles'
 
 interface IEventCard {
-  id: number,
+  id: string,
   imageUrl: string,
   title: string,
   local: string,

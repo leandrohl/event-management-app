@@ -1,28 +1,29 @@
-import auth from '@react-native-firebase/auth';
-
 import * as S from './styles'
 import NotLogged from "../../components/NotLogged";
 import { View, ScrollView } from 'react-native'
 import {useEffect, useRef, useState} from 'react'
-import { IEvent } from '../../api/types';
 import TickedCard from './components/TicketCard';
 import TicketDetail from './components/TicketDetail';
 import { Modalize } from 'react-native-modalize';
 import firestore from '@react-native-firebase/firestore';
 import Icon from '../../assets/icons';
-import { useTheme } from 'styled-components/native';
+import { useAuth } from '../../contexts/Auth';
+import { ITicket } from '../../services/types';
 
 export default function Tickets({ navigation }) {
-  const user = auth().currentUser
-  const [ticketList, setTicketList] = useState<IEvent[]>([])
-  const [eventSelected, setEventSelected] = useState<IEvent>()
+  const { user, signed } = useAuth()
+  const [ticketList, setTicketList] = useState<ITicket[]>([])
+  const [ticketSelected, setTicketSelected] = useState<ITicket>()
+  const modalizeRef = useRef<Modalize>(null)
   const database = firestore();
 
-  const modalizeRef = useRef<Modalize>(null)
-
   useEffect(() => {
-    if (user) {
-      database.collection(user.uid).onSnapshot(( query ) => {
+    searchTickets()
+  }, [])
+
+  const searchTickets = async () => {
+    if (signed) {
+      database.collection(user.userId).onSnapshot(( query ) => {
         const list = []
         query.forEach((doc) => {
           list.push({ ...doc.data(), id: doc.id })
@@ -30,7 +31,8 @@ export default function Tickets({ navigation }) {
         setTicketList(list)
       })
     } else setTicketList([])
-  }, [])
+  }
+
 
   const renderNoResults = () => (
     <S.ContainerNoResults>
@@ -55,16 +57,16 @@ export default function Tickets({ navigation }) {
         <View>
           { ticketList.length > 0 
             ? (
-              ticketList.map(event => (
+              ticketList.map(ticket => (
                 <TickedCard 
-                  key={event.id}
-                  id={event.id}
-                  title={event.name}
-                  imageUrl={event.imageUrl}
-                  dateInicial={event.date}
-                  local={event.local}
+                  key={ticket.id}
+                  id={ticket.id}
+                  title={ticket.event.name}
+                  imageUrl={ticket.event.imageUrl}
+                  dateInicial={ticket.event.date}
+                  local={ticket.event.local}
                   onPress={() => {
-                    setEventSelected(event)
+                    setTicketSelected(ticket)
                     modalizeRef.current?.open()
                   }}
                 />
@@ -73,14 +75,14 @@ export default function Tickets({ navigation }) {
         }
         </View>
       </ScrollView>
-        <TicketDetail 
+      <TicketDetail 
         modalizeRef={modalizeRef} 
-        eventSelected={eventSelected}
+        ticketSelected={ticketSelected}
       />
     </S.Container>
   )
 
-  return user 
+  return signed 
     ? renderTickets() 
     : <NotLogged 
       navigation={navigation}

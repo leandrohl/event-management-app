@@ -1,17 +1,18 @@
-import { Button, Text, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import Input from "../../components/Input";
 import { useState, useEffect } from 'react'
 
 import * as S from './styles'
-import { IEvent } from "../../api/types";
-import api from "../../api/axios";
+import { IEvent } from "../../services/types";
 import Card from "../../components/Card";
 import Icon from "../../assets/icons";
 import { useTheme } from "styled-components/native";
+import firestore from '@react-native-firebase/firestore';
 
 export default function Search({ navigation }) {
   const [search, setSearch] = useState('')
   const [eventList, setEventList] = useState<IEvent[]>([])
+  const database = firestore();
 
   const theme = useTheme()
 
@@ -24,18 +25,17 @@ export default function Search({ navigation }) {
   }, [])
 
   const searchEvents = async () => {
-    try {
-      const response = await api.get<IEvent[]>('/events')
-      if (response) {
-        setEventList(response.data)
-      }
-    } catch (err) {
-      // console.log(err)
-    }
+    database.collection('Events').onSnapshot(( query ) => {
+      const list = []
+      query.forEach((doc) => {
+        list.push({ ...doc.data(), id: doc.id })
+      })
+      setEventList(list)
+    }) 
   }
 
-  const goToEventDetails = (id: number) => {
-    navigation.navigate('Details', { eventId: id });
+  const goToEventDetails = (event: IEvent) => {
+    navigation.navigate('Details', { event });
   }
 
   const renderNoResults = () => (
@@ -58,7 +58,7 @@ export default function Search({ navigation }) {
         icon="Search"
       />
       <ScrollView style={{ marginTop: 16}}>
-        <View >
+        <View>
           { eventFiltered.length > 0
             ? (
               eventFiltered.map(event => (
@@ -69,7 +69,7 @@ export default function Search({ navigation }) {
                   imageUrl={event.imageUrl}
                   dateInicial={event.date}
                   local={event.local}
-                  onPress={() => goToEventDetails(event.id)}
+                  onPress={() => goToEventDetails(event)}
                 />
               ))
             )
@@ -84,7 +84,7 @@ export default function Search({ navigation }) {
                   imageUrl={event.imageUrl}
                   dateInicial={event.date}
                   local={event.local}
-                  onPress={() => goToEventDetails(event.id)}
+                  onPress={() => goToEventDetails(event)}
                 />
               ))
             )
