@@ -27,6 +27,13 @@ export default function NotLogged(props: INotLoggedProps) {
           variant="outlined"
           handleClick={() => navigation.navigate("Login")}
         />
+        <View style={{ marginTop: 16 }}>
+          <Button 
+            title="Cadastrar"
+            variant="outlined"
+            handleClick={() => navigation.navigate("NewUser")}
+          />
+        </View>
       </S.LoginView>
     </S.Container>
   )

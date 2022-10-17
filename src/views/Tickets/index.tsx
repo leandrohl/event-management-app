@@ -20,6 +20,10 @@ export default function Tickets({ navigation }) {
   const modalizeRef = useRef<Modalize>(null)
 
   useEffect(() => {
+    searchTickets()
+  }, [])
+
+  const searchTickets = async () => {
     if (signed) {
       database.collection(user.userId).onSnapshot(( query ) => {
         const list = []
@@ -29,7 +33,8 @@ export default function Tickets({ navigation }) {
         setTicketList(list)
       })
     } else setTicketList([])
-  }, [])
+  }
+
 
   const renderNoResults = () => (
     <S.ContainerNoResults>

@@ -35,9 +35,6 @@ export default function EditUser({ navigation, route }) {
         return
       }
 
-      await auth().currentUser.updateProfile({
-        displayName: name
-      })
       updateUserName(name)
       navigation.navigate("Perfil")
     } catch (error) {

@@ -15,44 +15,22 @@ import Loading from "../../components/Loading";
 import { useTheme } from "styled-components/native";
 
 interface IParams {
-  eventId: number
+  event: IEvent
 }
 
 export default function DetailsEvent( { navigation, route }) {
-  const { eventId } = route.params as IParams
-  const [eventSelected, setEventSelected] = useState<IEvent>()
-  const [loading, setLoading] = useState(true)
+  const { event } = route.params as IParams
+  const [eventSelected, setEventSelected] = useState<IEvent>(event)
+  const [loading, setLoading] = useState(false)
 
   const modalizeRef = useRef<Modalize>(null)
   const database = firestore();
   const { user, signed } = useAuth()
   const theme = useTheme()
 
-  useEffect(() => {
-    searchEventById(eventId)
-  }, [])
-
-
-  const searchEventById = async (id: number) => {
-    try {
-      const response = await api.get<IEvent[]>('/events')
-      if (response) {
-        const event = response.data.find(event => event.id === id)
-
-        if (event) {
-          setEventSelected(event)
-        }
-      }
-    } catch (err) {
-      Snackbar.show({
-        text: 'Houve um erro ao buscar os detalhes do evento!',
-        duration: Snackbar.LENGTH_SHORT
-      })
-    }
-    setLoading(false)
-  }
   
   const handleAddTicket = () => {
+    setLoading(true)
     if (!signed) {
       Snackbar.show({
         text: 'Para comprar esse ingresso, você precisa estar autenticado.',
@@ -63,6 +41,7 @@ export default function DetailsEvent( { navigation, route }) {
           textColor: theme.colors.primary
         }
       })
+      setLoading(false)
       return
     }
 
@@ -71,6 +50,7 @@ export default function DetailsEvent( { navigation, route }) {
       dateBuy: new Date().toLocaleDateString('pt-br')
     } as ITicket)
     navigation.navigate("Ingressos")
+    setLoading(false)
   }
 
   if (loading) return <Loading />

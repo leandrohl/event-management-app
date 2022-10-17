@@ -1,5 +1,5 @@
 export interface IEvent {
-  id: number,
+  id: string,
   name: string,
   local: string,
   date: string,
@@ -14,7 +14,6 @@ export interface ITicket {
   dateBuy: string,
   event: IEvent
 }
-
 
 export class IAuth {
   email: string = ''

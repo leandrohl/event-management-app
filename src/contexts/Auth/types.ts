@@ -4,7 +4,7 @@ export interface IAuthContext {
   signed: boolean;
   user: IUserInfo;
   loadingScreen: boolean;
-  updateUserName: (name: string) => void
+  updateUserName: (name: string) => Promise<void>;
 }
 
 export interface IUserInfo {

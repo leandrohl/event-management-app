@@ -11,18 +11,21 @@ export function AuthProvider({ children }) {
   const [loadingScreen, setLoadingScreen] = useState(true)
 
   useEffect(() => {
-    auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUser({
-          userId: user.uid,
-          email: user.email,
-          name: user.displayName
-        })
-      } else {
-        setUser(null)
-      }
-    })
-    setLoadingScreen(false)
+    const loadAuthStateChanged = () => {
+      auth().onAuthStateChanged((user) => {
+        if (user) {
+          setUser({
+            userId: user.uid,
+            email: user.email,
+            name: user.displayName
+          })
+        } else {
+          setUser(null)
+        }
+      })
+      setLoadingScreen(false)
+    }
+    loadAuthStateChanged()
   }, []);
 
   const signIn = async (email: string, password: string) => {
@@ -45,7 +48,10 @@ export function AuthProvider({ children }) {
     return false
   };
 
-  const updateUserName = (name: string) => {
+  const updateUserName = async (name: string) => {
+    await auth().currentUser.updateProfile({
+      displayName: name
+    })
     setUser({ ...user, name })
   }
 

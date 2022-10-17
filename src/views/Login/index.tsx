@@ -60,6 +60,13 @@ export default function Login({ navigation }) {
     setLoading(false)
   }
 
+  const handleInputChange = (key: string, value: string) => {
+    setUserInfo({ ...userInfo, [key]: value })
+    if (value.length > 0) {
+      setError({ ...error, [key]: '' })
+    }
+  }
+
   return (
     <SafeAreaView style={{ flex: 1}}>
       <S.ViewGoBack>
@@ -71,7 +78,7 @@ export default function Login({ navigation }) {
           <View style={{ marginBottom: 20}}>
             <Input 
               value={userInfo.email}
-              handleChange={(text) => setUserInfo({ ...userInfo, email: text })}
+              handleChange={(text) => handleInputChange('email', text)}
               placeholder="Entre com seu email"
               autoComplete="off"
               autoCorrect={false}
@@ -82,7 +89,7 @@ export default function Login({ navigation }) {
           </View>
           <Input 
             value={userInfo.password}
-            handleChange={(text) => setUserInfo({ ...userInfo, password: text })}
+            handleChange={(text) => handleInputChange('password', text)}
             placeholder="Entre com sua senha"
             secureTextEntry
             autoComplete="off"

@@ -10,6 +10,7 @@ import * as S from './styles'
 import IconButton from "../../components/Buttons/IconButton";
 import { useTheme } from "styled-components";
 import Snackbar from "react-native-snackbar";
+import { useAuth } from "../../contexts/Auth";
 
 export class IUserInfo {
   name: string = ''
@@ -21,6 +22,7 @@ export default function NewUser({ navigation }) {
   const [userInfo, setUserInfo] = useState<IUserInfo>(new IUserInfo())
   const [error, setError] = useState<IUserInfo>(new IUserInfo())
   const [loading, setLoading] = useState(false)
+  const { updateUserName } = useAuth()
 
   const theme = useTheme()
 
@@ -53,10 +55,12 @@ export default function NewUser({ navigation }) {
         return 
       }
       const response = await auth().createUserWithEmailAndPassword(userInfo.email, userInfo.password)
-      await auth().currentUser.updateProfile({
+
+      await response.user.updateProfile({
         displayName: userInfo.name
       })
-      navigation.navigate("Perfil", { userId: response.user.uid})
+
+      navigation.navigate("Perfil", { userName: userInfo.name })
     } catch (error) {
       Snackbar.show({
         text: 'Houve um erro ao realizar o cadastro, tente novamente!',
@@ -64,6 +68,13 @@ export default function NewUser({ navigation }) {
       })
     }
     setLoading(false)
+  }
+
+  const handleInputChange = (key: string, value: string) => {
+    setUserInfo({ ...userInfo, [key]: value })
+    if (value.length > 0) {
+      setError({ ...error, [key]: '' })
+    }
   }
 
   return (
@@ -76,7 +87,7 @@ export default function NewUser({ navigation }) {
         <S.ContainerInputs>
           <Input 
             value={userInfo.name}
-            handleChange={(text) => setUserInfo({ ...userInfo, name: text })}
+            handleChange={(text) => handleInputChange('name', text)}
             placeholder="Nome"
             autoComplete="off"
             autoCorrect={false}
@@ -86,7 +97,7 @@ export default function NewUser({ navigation }) {
           <View style={{ marginTop: 20, marginBottom: 20}}>
             <Input 
               value={userInfo.email}
-              handleChange={(text) => setUserInfo({ ...userInfo, email: text })}
+              handleChange={(text) => handleInputChange('email', text)}
               placeholder="Email"
               autoComplete="off"
               autoCorrect={false}
@@ -97,7 +108,7 @@ export default function NewUser({ navigation }) {
           </View>
           <Input 
             value={userInfo.password}
-            handleChange={(text) => setUserInfo({ ...userInfo, password: text })}
+            handleChange={(text) => handleInputChange('password', text)}
             placeholder="Senha"
             secureTextEntry
             autoComplete="off"
