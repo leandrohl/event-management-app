@@ -7,6 +7,7 @@ import { useFonts } from "expo-font";
 import { AuthProvider } from "./src/contexts/Auth";
 import { LOCALE_YUP } from "./src/config/constants";
 import { setLocale } from 'yup'
+import { StatusBar } from "react-native";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,6 +25,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer theme={themeNavigation}>
         <AuthProvider>
+          <StatusBar barStyle="light-content" backgroundColor={theme.colors.background} />
           <Routes />
         </AuthProvider>
       </NavigationContainer>

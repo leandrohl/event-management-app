@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text, SafeAreaView } from "react-native";
+import { useState } from "react";
+import { View, Text, SafeAreaView } from "react-native";
 import Button from "../../components/Buttons/Button";
 import Input from "../../components/Input";
 import auth from '@react-native-firebase/auth';
@@ -22,7 +22,6 @@ export default function NewUser({ navigation }) {
   const [userInfo, setUserInfo] = useState<IUserInfo>(new IUserInfo())
   const [error, setError] = useState<IUserInfo>(new IUserInfo())
   const [loading, setLoading] = useState(false)
-  const { updateUserName } = useAuth()
 
   const theme = useTheme()
 

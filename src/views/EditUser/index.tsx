@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import { View, TouchableOpacity, Text, SafeAreaView } from "react-native";
 import Button from "../../components/Buttons/Button";
 import Input from "../../components/Input";
-import auth from '@react-native-firebase/auth';
 
 import * as S from './styles'
 
 import IconButton from "../../components/Buttons/IconButton";
-import { useTheme } from "styled-components/native";
 import Snackbar from "react-native-snackbar";
 import { useAuth } from "../../contexts/Auth";
 
@@ -35,7 +33,7 @@ export default function EditUser({ navigation, route }) {
         return
       }
 
-      updateUserName(name)
+      await updateUserName(name)
       navigation.navigate("Perfil")
     } catch (error) {
       Snackbar.show({

@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Button from "../../components/Buttons/Button";
-import auth from '@react-native-firebase/auth';
 
 import * as S from './styles'
 import NotLogged from "../../components/NotLogged";

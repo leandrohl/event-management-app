@@ -11,13 +11,11 @@ import { useAuth } from '../../contexts/Auth';
 import { ITicket } from '../../services/types';
 
 export default function Tickets({ navigation }) {
+  const { user, signed } = useAuth()
   const [ticketList, setTicketList] = useState<ITicket[]>([])
   const [ticketSelected, setTicketSelected] = useState<ITicket>()
-  const database = firestore();
-
-  const { user, signed } = useAuth()
-
   const modalizeRef = useRef<Modalize>(null)
+  const database = firestore();
 
   useEffect(() => {
     searchTickets()

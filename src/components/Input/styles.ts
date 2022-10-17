@@ -10,7 +10,7 @@ export const Container = styled.View<InputStyle>`
   flex-direction: row;
   align-items:center;
   border-radius: 4px;
-  padding: 8px 8px;
+  padding: 0 8px;
   margin-top: 2px;
   border-bottom-width: 2px;
   border-bottom-color: ${props => 

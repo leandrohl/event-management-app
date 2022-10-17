@@ -8,11 +8,4 @@ export const LOCALE_YUP = {
     max: 'Máximo de ${max} caracteres',
     email: 'E-mail inválido'
   },
-  number: {
-    moreThan: 'Campo deve ter um valor selecionado'
-  },
-  date: {
-    min: 'Data deve ser superior a ${min}',
-    max: 'Data deve ser superior a ${max}'
-  }
 }

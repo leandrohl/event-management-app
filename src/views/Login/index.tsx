@@ -2,7 +2,6 @@ import { useState } from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import Button from "../../components/Buttons/Button";
 import Input from "../../components/Input";
-import auth from '@react-native-firebase/auth';
 
 import * as S from './styles'
 
