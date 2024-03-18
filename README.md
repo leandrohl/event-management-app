@@ -1,5 +1,5 @@
 <h1 align="center">
-  MB LABS - Desafio
+  Gestão de eventos
 </h1>
 <p> Aplicativo de gestão de eventos. </p>
 
